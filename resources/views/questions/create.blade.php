@@ -6,6 +6,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
         <title>Laravel</title>
@@ -45,7 +47,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="question-title">Question Title</label>
-                                <input type="text" name="title" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : ''}}">
+                                <input type="text" name="title"  value="{{ old('title') }}" id="question-title" class="form-control {{ $errors->has('title') ? 'is-invalid' : ''}}">
 
                                 @if ($errors->has('title'))
                                     <div class="invalid-feedback">
@@ -55,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="question-body">Explain your question</label>
-                                <textarea name="body" id="question-body" row="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : ''}}"></textarea>
+                                <textarea name="body" id="question-body" row="10" class="form-control {{ $errors->has('body') ? 'is-invalid' : ''}}">{{ old('body') }}</textarea>
                                 
                                 @if ($errors->has('body'))
                                     <div class="invalid-feedback">
